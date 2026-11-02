@@ -1,0 +1,54 @@
+@model FloristeriaBotero.Models.Pedido
+
+@{
+    ViewData["Title"] = "Realizar Pedido";
+}
+
+<div class="container mt-4">
+    <h1 class="text-success">📝 Realizar Pedido</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Registrar" method="post" class="card bg-dark text-light border-success p-4 shadow">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label asp-for="Cliente" class="form-label"></label>
+                    <input asp-for="Cliente" class="form-control" placeholder="Ej: María López" />
+                    <span asp-validation-for="Cliente" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Correo" class="form-label"></label>
+                    <input asp-for="Correo" class="form-control" placeholder="ejemplo@correo.com" />
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Producto" class="form-label"></label>
+                    <select asp-for="Producto" class="form-select">
+                        <option value="">Selecciona una opción...</option>
+                        <option value="Ramo de Rosas">Ramo de Rosas</option>
+                        <option value="Arreglo Primaveral">Arreglo Primaveral</option>
+                        <option value="Orquídea Blanca">Orquídea Blanca</option>
+                        <option value="Girasoles">Girasoles</option>
+                    </select>
+                    <span asp-validation-for="Producto" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Cantidad" class="form-label"></label>
+                    <input asp-for="Cantidad" class="form-control" placeholder="1 - 50" />
+                    <span asp-validation-for="Cantidad" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">🌸 Registrar pedido</button>
+                <a asp-action="Index" class="btn btn-outline-secondary w-100 mt-2">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,46 @@
+@model List<FloristeriaBotero.Models.Pedido>
+
+@{
+    ViewData["Title"] = "Pedidos";
+}
+
+<div class="container mt-4">
+    <h1 class="text-success">🌸 Floristería Botero</h1>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Mensaje"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <p class="lead">Total de pedidos: <span class="badge bg-success">@Model.Count</span></p>
+    <a asp-action="Registrar" class="btn btn-success mb-3">➕ Realizar nuevo pedido</a>
+
+    @if (Model.Count == 0)
+    {
+        <p class="text-muted fst-italic">Aún no hay pedidos registrados.</p>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var pedido in Model)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-pedido h-100 p-3">
+                        <h5 class="text-success">@pedido.Cliente</h5>
+                        <p class="mb-1"><strong>Correo:</strong> @pedido.Correo</p>
+                        <p class="mb-1"><strong>Producto:</strong> @pedido.Producto</p>
+                        <p class="mb-1"><strong>Cantidad:</strong> @pedido.Cantidad</p>
+                        <p class="mb-1 text-danger fw-bold">Total: $@pedido.Total.ToString("N0")</p>
+                        <form asp-action="Eliminar" asp-route-id="@pedido.Id" method="post" class="mt-2">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Eliminar pedido?')">🗑️ Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

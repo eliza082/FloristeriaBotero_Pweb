@@ -29,3 +29,30 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+body {
+    background: linear-gradient(180deg, #fff8f0 0%, #ffe6eb 100%);
+    color: #2b2b2b;
+    min-height: 100vh;
+}
+
+.card-pedido {
+    background: #ffffff;
+    border-left: 5px solid #198754;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-pedido:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(25, 135, 84, 0.3);
+}
+
+.text-success {
+    color: #198754 !important;
+}
+
+.btn-success {
+    background-color: #198754;
+    border-color: #198754;
+    font-weight: bold;
+}
